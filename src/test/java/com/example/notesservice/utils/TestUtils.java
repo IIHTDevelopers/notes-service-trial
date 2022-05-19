@@ -119,6 +119,7 @@ public class TestUtils {
 //				System.out.println(e);
 //			}
 
+		try{
 		URL url = new URL(URL);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setDoOutput(true);
@@ -130,8 +131,11 @@ public class TestUtils {
 		OutputStream os = conn.getOutputStream();
 		os.write(input.getBytes());
 		os.flush();
+		}catch(Exception ex){
+			System.out.println("SERVER ERROR : " + ex);
+		}
 
-		if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+		/*if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
 			throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
 		}
 
@@ -141,7 +145,7 @@ public class TestUtils {
 		System.out.println("Output from Server .... \n");
 		while ((output = br.readLine()) != null) {
 			System.out.println(output);
-		}
+		}*/
 
 		total++;
 		String[] r = testName.split("(?=\\p{Upper})");
